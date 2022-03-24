@@ -1,65 +1,61 @@
 module.exports = {
-    // extends: [
-    //     "plugin:cypress/recommended"
-    // ],
-    env: {
-        browser: true,
-        commonjs: true,
-        es6: true,
-        node: true,
-        jest: true,
-        // "cypress/globals": true,
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    // "plugin:cypress/recommended",
+  ],
+  env: {
+    browser: true,
+    commonjs: true,
+    es6: true,
+    node: true,
+    jest: true,
+    // "cypress/globals": true,
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx'],
+        moduleDirectory: [
+          'node_modules',
+          'src'
+        ],
+      },
+      webpack: {
+        config: 'webpack.config.js',
+      },
     },
-    settings: {
-        // 'import/parsers': {
-        //     '@typescript-eslint/parser': ['.ts', '.tsx'],
-        // },
-        'import/resolver': {
-            node: {
-                extensions: ['.js', '.jsx', '.ts', '.tsx'],
-                moduleDirectory: [
-                    'node_modules',
-                    'src'
-                ],
-            },
-            webpack: {
-                config: 'webpack.config.js',
-            },
-            // typescript: {
-            //     alwaysTryTypes: true,
-            //     project: 'tsconfig.json',
-            // }
-        },
+  },
+  // globals: {
+  //   React: true,
+  //   ReactDOM: true,
+  //   PropTypes: true,
+  //   Webpack: true,
+  // },
+  plugins: [
+    'react',
+    'react-hooks',
+    '@emotion',
+    // 'cypress',
+  ],
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
     },
-    globals: {
-        React: true,
-        ReactDOM: true,
-        PropTypes: true,
-        Webpack: true,
-    },
-    plugins: [
-        'react',
-        // '@typescript-eslint',
-        // '@emotion',
-        // 'cypress',
-    ],
-    // parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaVersion: 6,
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true,
-        },
-    },
-    rules: {
-        /* eslint-specific */
-        'comma-dangle': ['error', 'only-multiline'],
-        'import/extensions': 0,
-        'import/prefer-default-export': 0,
-        'no-console': 'warn',
-
-        'react/jsx-filename-extension': ['error', {
-            extensions: ['.jsx']
-        }]
-    }
+  },
+  rules: {
+    'comma-dangle': ['error', 'only-multiline'],
+    'import/extensions': 0,
+    'import/prefer-default-export': 0,
+    'no-console': 'warn',
+    quotes: ['error', 'single'],
+    'react/jsx-filename-extension': ['error', {
+      extensions: ['.jsx']
+    }],
+    'react/display-name': 0,
+    'react/prop-types': 0,
+  }
 };

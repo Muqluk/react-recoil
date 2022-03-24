@@ -27,6 +27,10 @@
     "**/LICENSE": true,
     "**/package-lock.json": true,
     "**/package.json": true,
-    "**/webpack.config.js": true
+    "**/webpack.config.js": true,
+    "**/src/styles": true,
+    "**/src/app.jsx": true,
+    "**/src/components/layout.jsx": true,
+    "**/src/components/shared": true
   }
 }

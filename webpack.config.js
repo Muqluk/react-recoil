@@ -1,50 +1,58 @@
-const path = require("path");
-const ESLintPlugin = require("eslint-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+/*
+*
+*
+*     refer to the config here if issues: https://github.com/Muqluk/data-validator
+*
+*
+*/
 
 module.exports = (env) => {
-  const buildEnv = env?.target || "dev";
+  const buildEnv = env?.target || 'dev';
 
   const buildMode = {
-    dev: "development",
-    prod: "production",
+    dev: 'development',
+    prod: 'production',
   };
 
   const srcMap = {
-    dev: "eval-source-map",
-    prod: "source-map",
+    dev: 'eval-source-map',
+    prod: 'source-map',
   };
 
   const config = {
     mode: buildMode[buildEnv],
     devtool: srcMap[buildEnv],
-    stats: "minimal",
+    stats: 'minimal',
     context: path.resolve(process.cwd()),
-    target: "web",
+    target: 'web',
     entry: {
-      src: "src/index.jsx",
+      src: 'public/index.jsx',
     },
     output: {
       // I need to do some more reading on output settings
       // https://webpack.js.org/configuration/output/
       charset: true,
-      path: path.join(process.cwd(), "/dist"),
-      filename: "[name].bundle.js",
-      publicPath: "./",
+      path: path.join(process.cwd(), '/dist'),
+      filename: '[name].bundle.js',
+      publicPath: './',
     },
     resolve: {
-      extensions: [".js", ".jsx"],
-      modules: [process.cwd(), path.join(process.cwd(), "src"), "node_modules"],
+      extensions: ['.js', '.jsx'],
+      modules: [process.cwd(), path.join(process.cwd(), 'src'), 'node_modules'],
     },
     module: {
       rules: [
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/env", "@babel/react"],
+            presets: ['@babel/env', '@babel/react'],
             sourceMaps: true,
           },
         },
@@ -54,15 +62,15 @@ module.exports = (env) => {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                publicPath: "public",
+                publicPath: 'public',
               },
             },
             // Creates `style` nodes from JS strings
             // "style-loader",
             // Translates CSS into CommonJS
-            "css-loader",
+            'css-loader',
             // Compiles Sass to CSS
-            "sass-loader",
+            'sass-loader',
           ],
         },
         {
@@ -71,21 +79,21 @@ module.exports = (env) => {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                publicPath: "public",
+                publicPath: 'public',
               },
             },
             // Creates `style` nodes from JS strings
-            "style-loader",
-            "css-loader",
+            'style-loader',
+            'css-loader',
           ],
         },
       ],
     },
     devServer: {
-      allowedHosts: ["all"],
+      allowedHosts: ['all'],
       bonjour: false,
       client: {
-        logging: "error", //  'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'
+        logging: 'error', //  'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'
         overlay: {
           errors: false,
           warnings: false,
@@ -94,34 +102,34 @@ module.exports = (env) => {
       },
       compress: false,
       historyApiFallback: true,
-      host: "localhost",
+      host: 'localhost',
       hot: true,
       liveReload: false,
       open: true,
       port: 9000,
-      static: path.join(process.cwd(), "public"),
+      static: path.join(process.cwd(), 'public'),
       devMiddleware: {
         index: true,
-        publicPath: "/",
+        publicPath: '/',
         writeToDisk: true,
       },
     },
     plugins: [
       new ESLintPlugin({
-        extensions: [".js", ".jsx"],
+        extensions: ['.js', '.jsx'],
         fix: false,
         failOnWarning: false,
         outputReport: true,
       }),
       new HtmlWebpackPlugin({
-        template: "public/index.html",
+        template: 'public/index.html',
         minify: {
           minifyJS: false,
         },
       }),
       new MiniCssExtractPlugin({
-        filename: "[name].bundle.css",
-        chunkFilename: "[id].css",
+        filename: '[name].bundle.css',
+        chunkFilename: '[id].css',
       }),
     ],
   };
